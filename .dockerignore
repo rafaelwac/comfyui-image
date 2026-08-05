@@ -1,0 +1,6 @@
+# Git
+.git
+.github
+
+# Lokale Build-Artefakte
+*.log

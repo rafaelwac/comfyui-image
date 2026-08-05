@@ -17,14 +17,14 @@ Kein Paste, kein manuelles `save.sh`, kein Restart.
 1. Diesen Ordner in ein GitHub-Repo pushen (z.B. `comfyui-image`).
 2. Bei jedem Push auf `main` baut die Action (`.github/workflows/docker.yml`)
    das Image für `linux/amd64` und pusht es nach GHCR:
-   `ghcr.io/<dein-github-user-lowercase>/comfyui-image:v1`
-3. Im GitHub-Package (`https://github.com/users/<user>/packages/container/comfyui-image`)
-   unten *Package settings* → *Danger Zone* → **Change visibility → Public**
-   (sonst kann RunPod es nicht anonym pullen; für Private ein RunPod-Registry-Secret anlegen).
+   `ghcr.io/<dein-github-user-lowercase>/comfyui-image:v1` **und** `docker.io/rndm77/comfyui-image:v1`
+3. RunPod zieht das Docker-Hub-Image öffentlich ohne Auth.
+   (Das parallele GHCR-Image bleibt als Backup private.)
 
 ## RunPod-Template anpassen
 
-- **Container image:** `ghcr.io/<dein-github-user-lowercase>/comfyui-image:v1`
+- **Container image:** `docker.io/rndm77/comfyui-image:v1` (Docker Hub, public — ohne RunPod-Registry-Auth)
+  Alternative: `ghcr.io/rafaelwac/comfyui-image:v1` (benötigt RunPod-Registry-Auth, da private)
 - **Container Start Command:** *leer lassen* (das Image übernimmt alles)
 - **Environment variables:**
   - `HF_TOKEN` = dein HF-Token mit **Write**-Rechten (als Secret anlegen → verschlüsselt)
